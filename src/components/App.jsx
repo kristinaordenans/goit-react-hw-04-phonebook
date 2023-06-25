@@ -1,10 +1,25 @@
-import { Component } from 'react';
+import { Component, useState } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContacForm/ContactForm';
 import { Filter } from './FilterContacts/FilterContacts';
 import { nanoid } from 'nanoid';
 import { Container, ContainerTitle, ContactsTitle } from './App.styled';
+// import { useEffect, useState } from 'react';
 
+
+// const useLocalStorage = (defaultValue) => {
+//   const [contacts, setContacts] = useState(() => {
+//     return JSON.parse(window.localStorage.getItem('contacts')) ?? defaultValue
+//   });
+
+//   useEffect(() => {
+//         window.localStorage.setItem('contacys', JSON.stringify(contacts))
+//   },[contacts])
+//  return [contacts, setContacts]
+// }
+
+// const [contacts, setContacts] = useLocalStorage('');
+// const [filter, setFilter] = useState('');
 
 export class App extends Component {
 
@@ -52,14 +67,6 @@ export class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
     }
   }
-  
-  // useEffect(() => {
-  //   window.localStorage.setItem('name', JSON.stringify(name))
-  // },[name])
-  
-  // useEffect(() => {
-  //   window.localStorage.setItem('number', JSON.stringify(number))
-  // },[number])
 
   render() {
     const { contacts, filter } = this.state;

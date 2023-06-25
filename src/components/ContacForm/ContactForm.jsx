@@ -1,15 +1,23 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useState } from "react";
 // import { PropTypes } from "prop-types";
 import { Form, Button, Label, Input, Span} from "./ContactForm.styled";
 
+// const useLocalStorage = (key, defaultValue) => {
+//   const [state, setState] = useState(() => {
+//     return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue
+//   });
+
+//   useEffect(() => {
+//     window.localStorage.setItem(key, JSON.stringify(state))
+//   },[key, state])
+
+//   return [state, setState];
+// }
+
 export function ContactForm() {
-  const [name, setName] = useState(() => {
-    return JSON.parsel(window.localStorage.getItem('name')) ?? ''
-  });
-  const [number, setPhone] = useState(()=>{
-    return JSON.parsel(window.localStorage.getItem('number')) ??''
-  });
+  const [name, setName] = useState('');
+  const [number, setPhone] = useState('');
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -25,14 +33,6 @@ export function ContactForm() {
         return;
     }
   };
-
-   useEffect(() => {
-    window.localStorage.setItem('name', JSON.stringify(name))
-  },[name])
-  
-  useEffect(() => {
-    window.localStorage.setItem('number', JSON.stringify(number))
-  },[number])
 
   return (
     <Form>
