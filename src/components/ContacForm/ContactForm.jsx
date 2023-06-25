@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import { useState } from "react";
 // import { PropTypes } from "prop-types";
 import { Form, Button, Label, Input, Span} from "./ContactForm.styled";
 
-export function ContactForm(contacts, onSubmit) {
-  const [name, setName] = useState('');
-  const [number, setPhone] = useState('');
+export function ContactForm() {
+  const [name, setName] = useState(() => {
+    return JSON.parsel(window.localStorage.getItem('name')) ?? ''
+  });
+  const [number, setPhone] = useState(()=>{
+    return JSON.parsel(window.localStorage.getItem('number')) ??''
+  });
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -21,26 +26,16 @@ export function ContactForm(contacts, onSubmit) {
     }
   };
 
-  const handlrAddToContactList = (e) => {
-        // const { onSubmit, contacts } = this.props;
-        const includesName = contacts.find(({ name }) => name === name);
-        const includesNumber = contacts.find(({ number }) => number === number);
-        e.preventDefault();
-
-        if(includesName) {
-            alert(`'${this.state.name}'is alredy in contacts`)
-        } else if(includesNumber) {
-            alert(`'${this.state.number}'is alredy in contacts`)
-        } else {
-            onSubmit(this.state);
-            // this.setState({ name: '', number: '' })
-        }
-
-        // this.reset();
-    }
+   useEffect(() => {
+    window.localStorage.setItem('name', JSON.stringify(name))
+  },[name])
+  
+  useEffect(() => {
+    window.localStorage.setItem('number', JSON.stringify(number))
+  },[number])
 
   return (
-    <Form onClick={handlrAddToContactList}>
+    <Form>
             <Label>
               <Span>Name</Span>
               <Input type="text"
