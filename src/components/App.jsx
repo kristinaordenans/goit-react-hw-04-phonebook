@@ -6,14 +6,15 @@ import { Filter } from './FilterContacts/FilterContacts';
 import { nanoid } from 'nanoid';
 import { Container, ContainerTitle, ContactsTitle } from './App.styled';
 
+const contactArr = [];
+
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contacts')) ?? []
-  });
+  const initValue = JSON.parse(window.localStorage.getItem(contactArr)) === 0 ? JSON.parse(window.localStorage.getItem(contactArr)) : [];
+  const [contacts, setContacts] = useState(initValue);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts))
+    window.localStorage.setItem(contactArr, JSON.stringify(contacts))
   },[contacts])
 
 
@@ -52,7 +53,7 @@ const contactsLength = contacts.length;
 }
 
 
-// export class App extends Component {
+// export class OldApp extends Component {
 
 //   state = {
 //       contacts: [],
