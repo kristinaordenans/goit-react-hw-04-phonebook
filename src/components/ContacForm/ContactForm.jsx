@@ -22,8 +22,8 @@ export function ContactForm({onSubmit, contacts}) {
   };
 
   const handlrAddToContactList = (e) => {
-        const includesName = contacts.find(({ name }) => name === e.target.value);
-        const includesNumber = contacts.find(({ number }) => number === e.target.value);
+        const includesName = contacts.find(({ name }) => name);
+        const includesNumber = contacts.find(({ number }) => number);
         e.preventDefault();
 
         if(includesName) {
