@@ -15,7 +15,7 @@ import { Form, Button, Label, Input, Span} from "./ContactForm.styled";
 //   return [state, setState];
 // }
 
-export function ContactForm() {
+export function ContactForm({onSubmit, contacts}) {
   const [name, setName] = useState('');
   const [number, setPhone] = useState('');
 
@@ -34,8 +34,24 @@ export function ContactForm() {
     }
   };
 
+  const handlrAddToContactList = (e) => {
+        const includesName = contacts.find(({ name }) => name === e.target.value);
+        const includesNumber = contacts.find(({ number }) => number === e.target.value);
+        e.preventDefault();
+
+        if(includesName) {
+            alert(`'${name}'is alredy in contacts`)
+        } else if(includesNumber) {
+            alert(`'${number}'is alredy in contacts`)
+        } else {
+            onSubmit({name, number});
+          setName('');
+          setPhone('');
+        }
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handlrAddToContactList}>
             <Label>
               <Span>Name</Span>
               <Input type="text"

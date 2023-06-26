@@ -1,10 +1,11 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { ContactItem } from "components/ContactItem/ContactItem";
-import { ContactListContainer} from "./ContactList.styled";
+import { ContactListContainer } from "./ContactList.styled";
 
 
 export const ContactList = ({ contacts, onDeliteContact }) => {
+
     return (
     <div>
         <ContactListContainer>
