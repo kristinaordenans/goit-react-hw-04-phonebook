@@ -6,21 +6,21 @@ import { Filter } from './FilterContacts/FilterContacts';
 import { nanoid } from 'nanoid';
 import { Container, ContainerTitle, ContactsTitle } from './App.styled';
 
-const contactArr = [];
 
 export const App = () => {
-  const initValue = JSON.parse(window.localStorage.getItem(contactArr)) === 0 ? JSON.parse(window.localStorage.getItem(contactArr)) : [];
-  const [contacts, setContacts] = useState(initValue);
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(window.localStorage.getItem('contacts')) ?? []
+  });
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    window.localStorage.setItem(contactArr, JSON.stringify(contacts))
+    window.localStorage.setItem('contacts', JSON.stringify(contacts))
   },[contacts])
 
 
   const formSubmitHandler = (data) => {
     const contact = { ...data, id: nanoid()};
-    setContacts(prevContacts => [contact, ...prevContacts.contacts])
+    setContacts(prevContacts => [contact, ...prevContacts])
   }
 
  const deliteContact = (contactId) => {
@@ -46,7 +46,7 @@ const contactsLength = contacts.length;
         <ContactsTitle>Contacts</ContactsTitle>
         {contactsLength !== 0 && <Filter value={filter} filterInputChange={filtreInputChange} />}
         <ContactList
-          contacts={filtredContacts}
+          contacts={filtredContacts()}
           onDeliteContact={deliteContact}/> 
     </Container>
     );
